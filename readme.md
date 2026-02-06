@@ -51,3 +51,4 @@ Once the BMR is established, we apply an activity multiplier:
 - [ ] Create React + Tailwind Frontend
 - [ ] Containerize with Docker
 - [ ] Deploy with Nginx reverse proxy
+- [ ] Change UI colors depending what gender you choose
