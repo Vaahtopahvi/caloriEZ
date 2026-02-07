@@ -30,7 +30,7 @@ func calculator(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Sends the answer back to user's browser
-	fmt.Fprintf(w, "Results: Your daily BMR is %.2f calories", bmr)
+	fmt.Fprintf(w, "Results: Your daily BMR is %.0f calories", bmr)
 }
 
 func main() {
