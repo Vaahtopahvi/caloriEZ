@@ -9,6 +9,11 @@ import (
 // This is 'Handler' function
 func calculator(w http.ResponseWriter, r *http.Request) {
 
+	// Allow website to pull data. * for test, restrict later...
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	// Tell browser we're using JSON
+	w.Header().Set("Content-Type", "application/json")
+
 	// First get the data from URL
 	weightRaw := r.URL.Query().Get("weight")
 	heightRaw := r.URL.Query().Get("height")
@@ -49,12 +54,12 @@ func calculator(w http.ResponseWriter, r *http.Request) {
 	// Multiply bmr calories with activity level
 	tdee := bmr * multiplier
 
-	// Sends the answer back to user's browser
-	fmt.Fprintf(w, "Your BMR is %.0f. With your activity level (%s), your total daily burn is %.0f calories.", bmr, activity, tdee)
+	// Send data back to React (json)
+	fmt.Fprintf(w, `{"bmr": %.0f, "tdee": %.0f, "activity": "%s"}`, bmr, tdee, activity)
 }
 
 func main() {
 	http.HandleFunc("/calculate", calculator)
-	fmt.Println("Server starting on http://localhost:8080")
+	fmt.Println("API Live on http://localhost:8080")
 	http.ListenAndServe(":8080", nil)
 }
