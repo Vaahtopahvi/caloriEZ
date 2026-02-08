@@ -9,7 +9,7 @@ import (
 // This is 'Handler' function
 func calculator(w http.ResponseWriter, r *http.Request) {
 
-	// Allow website to pull data. * for test, restrict later...
+	// Allow website to pull data.TODO: * for test, restrict later...
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	// Tell browser we're using JSON
 	w.Header().Set("Content-Type", "application/json")
