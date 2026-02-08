@@ -1,13 +1,11 @@
-import { Button } from '@mui/material'
-// import './App.css'
+import { SelectField } from './components/SelectField';
 
 function App() {
-
   return (
     <>
-      <Button variant="contained">Contained</Button>
+      <SelectField />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
