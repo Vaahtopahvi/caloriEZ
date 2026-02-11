@@ -1,4 +1,5 @@
 import { SelectField } from "./components/SelectField";
+// import { ThemeProvider } from '@mui/material/styles';
 import InputField from "./components/InputField";
 import { CalculateCalories } from "./services/api";
 import type { CalculatorInput, CalculatorResult } from "./types/calculator";
@@ -6,6 +7,7 @@ import { useState } from "react";
 import Container from "@mui/material/Container";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
+// import { darkTheme } from "./theme.tsx"
 
 function App() {
   const [weight, setWeight] = useState("70");
@@ -31,10 +33,7 @@ function App() {
       const response = await CalculateCalories(input);
       setResult(response);
     } catch (error) {
-      // setResult(
-      //   "An error occurred while calculating. Please check your inputs and try again.",
-      // );
-      console.error(error);
+      console.log(error);
     }
 
     // alert(
