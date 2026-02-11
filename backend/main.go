@@ -20,6 +20,7 @@ func calculator(w http.ResponseWriter, r *http.Request) {
 	ageRaw := r.URL.Query().Get("age")
 	gender := r.URL.Query().Get("gender")
 	activity := r.URL.Query().Get("activity")
+	goal := r.URL.Query().Get("goal") // Is goal to lose/gain/maintain weight
 
 	// Converts that text to deciam numbers
 	weight, _ := strconv.ParseFloat(weightRaw, 64)
@@ -54,8 +55,24 @@ func calculator(w http.ResponseWriter, r *http.Request) {
 	// Multiply bmr calories with activity level
 	tdee := bmr * multiplier
 
+	//Calculate calories based on goal
+	var target float64
+	switch goal {
+	case "lose":
+		target = tdee - 500
+	case "fast-gain":
+		target = tdee + 500
+	case "slow-gain":
+		target = tdee + 250
+	case "maintain":
+		target = tdee
+	default:
+		target = tdee
+	}
+
 	// Send data back to React (json)
-	fmt.Fprintf(w, `{"bmr": %.0f, "tdee": %.0f, "activity": "%s"}`, bmr, tdee, activity)
+	fmt.Fprintf(w, `{"bmr": %.0f, "tdee": %.0f, "target": %.0f, "goal": "%s"}`,
+		bmr, tdee, target, goal)
 }
 
 func main() {
