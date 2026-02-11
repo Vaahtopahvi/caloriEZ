@@ -70,6 +70,10 @@ func calculator(w http.ResponseWriter, r *http.Request) {
 		target = tdee
 	}
 
+	/*Add hardlimit to calories so they don't go below 1500 calories for men or 1200 for women
+	Add feature which suggests daily calorie deficit based on BMI (really obese people can easily be eating -1000calories/day)
+	*/
+
 	// Send data back to React (json)
 	fmt.Fprintf(w, `{"bmr": %.0f, "tdee": %.0f, "target": %.0f, "goal": "%s"}`,
 		bmr, tdee, target, goal)
